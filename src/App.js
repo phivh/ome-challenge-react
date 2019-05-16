@@ -1,17 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import CardList from './components/CardList';
 import styled from 'styled-components';
 import fetch from 'isomorphic-fetch';
 
 import { summaryDonations } from './helpers';
 
 
-const Card = styled.div`
-  margin: 10px;
-  border: 1px solid #ccc;
+const Wrapper = styled.div`
+  width: 100%;
+  overflow: hidden;
+  font-family: tahoma, san-serif;
 `;
 
-export default connect((state) => state)(
+const Header = styled.div`
+  background: none;
+  color: #000;
+  padding: 10px;
+  
+  > div {
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    text-align:center;
+    width:100%;
+  }
+`;
+
+const DivContainer = styled.div`
+  max-width: 1300px;
+  margin: auto;
+`;
+
+export default connect((state) => state)( 
   class App extends Component {
     constructor(props) {
       super();
@@ -41,27 +62,8 @@ export default connect((state) => state)(
 
     render() {
       const self = this;
-      const cards = this.state.charities.map(function(item, i) {
-        const payments = [10, 20, 50, 100, 500].map((amount, j) => (
-          <label key={j}>
-            <input
-              type="radio"
-              name="payment"
-              onClick={function() {
-                self.setState({ selectedAmount: amount })
-              }} /> {amount}
-          </label>
-        ));
-
-        return (
-          <Card key={i}>
-            <p>{item.name}</p>
-            {payments}
-            <button onClick={handlePay.call(self, item.id, self.state.selectedAmount, item.currency)}>Pay</button>
-          </Card>
-        );
-      });
-
+      const charities = this.state.charities;
+      const cards = <CardList charities={charities} />;
       const style = {
         color: 'red',
         margin: '1em 0',
@@ -73,12 +75,19 @@ export default connect((state) => state)(
       const message = this.props.message;
 
       return (
-        <div>
-          <h1>Tamboon React</h1>
-          <p>All donations: {donate}</p>
-          <p style={style}>{message}</p>
-          {cards}
-        </div>
+        <Wrapper>
+          <Header>
+            <DivContainer>
+              <h1>Omise Tamboon React</h1>
+              <p>All donations: {donate}</p>
+              <p style={style}>{message}</p>
+            </DivContainer>  
+          </Header>
+          <DivContainer>
+            {cards}
+          </DivContainer>
+        </Wrapper>
+        
       );
     }
   }

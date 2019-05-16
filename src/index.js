@@ -20,12 +20,12 @@ const store = createStore(function(state, action) {
         message: action.message,
       });
 
-    default: return _state;
+    default: return _state;  
   }
 });
 
 render(
-  <Provider store={store}>
+  <Provider store={store}>  
     <App />
   </Provider>,
   document.getElementById('root')

@@ -12,7 +12,7 @@ const config = {
 
   devServer: {
     inline: true,
-    host: '0.0.0.0',
+    host: 'localhost',
     port: 3000,
     historyApiFallback: true,
     disableHostCheck: true,
@@ -24,9 +24,14 @@ const config = {
       {
         test: /\.js$/,
         exclude: [/node_modules/],
-        use: {
-          loader: 'babel-loader',
-        },
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['react']
+            }
+          }
+        ]
       },
     ],
   },
