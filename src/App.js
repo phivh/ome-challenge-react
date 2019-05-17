@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CardList from './components/CardList';
 import styled from 'styled-components';
-import fetch from 'isomorphic-fetch';
-
-import { summaryDonations } from './helpers';
+import TotalDonations from './components/Donations';
+import Notification from './components/Notification';
+import { payDonation, hydrateAppData } from './actions';
 
 
 const Wrapper = styled.div`
@@ -30,61 +30,47 @@ const Header = styled.div`
 const DivContainer = styled.div`
   max-width: 1300px;
   margin: auto;
+  > div.donate {
+    margin: auto;
+    width: 15%;
+    max-width:200px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    background: #2962FF;
+    color:#fff;
+  }
 `;
 
 export default connect((state) => state)( 
   class App extends Component {
     constructor(props) {
-      super();
-
-      this.state = {
-        charities: [],
-        selectedAmount: 10,
-      };
+      super(props);
+      this.handlePay = this.handlePay.bind(this);
     }
-
-    componentDidMount() {
-      const self = this;
-      fetch('http://localhost:3001/charities')
-        .then(function(resp) { return resp.json(); })
-        .then(function(data) {
-          self.setState({ charities: data }) });
-
-      fetch('http://localhost:3001/payments')
-        .then(function(resp) { return resp.json() })
-        .then(function(data) {
-          self.props.dispatch({
-            type: 'UPDATE_TOTAL_DONATE',
-            amount: summaryDonations(data.map((item) => (item.amount))),
-          });
-        })
+    componentWillMount() {
+      this.props.dispatch(hydrateAppData());
     }
-
+    handlePay(charitiesId, amount, currency) {
+      this.props.dispatch(payDonation({
+        charitiesId,
+        amount,
+        currency,
+      }));
+    }
     render() {
-      const self = this;
-      const charities = this.state.charities;
-      const cards = <CardList charities={charities} />;
-      const style = {
-        color: 'red',
-        margin: '1em 0',
-        fontWeight: 'bold',
-        fontSize: '16px',
-        textAlign: 'center',
-      };
-      const donate = this.props.donate;
-      const message = this.props.message;
-
+      const {charities, donate, notification} = this.props;
       return (
         <Wrapper>
           <Header>
             <DivContainer>
               <h1>Omise Tamboon React</h1>
-              <p>All donations: {donate}</p>
-              <p style={style}>{message}</p>
+              <div className="donate">Total Donations <TotalDonations totalAmout={donate}></TotalDonations></div>
             </DivContainer>  
-          </Header>
+          </Header> 
           <DivContainer>
-            {cards}
+            <Notification {...notification} />
+            <CardList charities={charities} handlePay={this.handlePay}/>
           </DivContainer>
         </Wrapper>
         
@@ -93,30 +79,3 @@ export default connect((state) => state)(
   }
 );
 
-function handlePay(id, amount, currency) {
-  const self = this;
-  return function() {
-    fetch('http://localhost:3001/payments', {
-      method: 'POST',
-      body: `{ "charitiesId": ${id}, "amount": ${amount}, "currency": "${currency}" }`,
-    })
-      .then(function(resp) { return resp.json(); })
-      .then(function() {
-        self.props.dispatch({
-          type: 'UPDATE_TOTAL_DONATE',
-          amount,
-        });
-        self.props.dispatch({
-          type: 'UPDATE_MESSAGE',
-          message: `Thanks for donate ${amount}!`,
-        });
-
-        setTimeout(function() {
-          self.props.dispatch({
-            type: 'UPDATE_MESSAGE',
-            message: '',
-          });
-        }, 2000);
-      });
-  }
-}

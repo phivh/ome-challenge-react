@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Test Omise code challenge for frontend developer",
   "main": "src/index.js",
-  "repository": "git@git.omise.co:ratchagarn/tamboon-react.git",
+  "repository": "git@github.com:phivh/ome-challenge-react.git",
   "author": "Ratchagarn Naewbuntad <ratchagarn@omise.co>",
+  "editor": "Phi Vo <phivh.github.io>",
   "license": "MIT",
   "scripts": {
     "server": "json-server --watch db.json --port 3001",
@@ -14,6 +15,7 @@
   "dependencies": {
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "bluebird": "^3.5.4",
     "change-case": "^3.1.0",
     "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.7.2",
@@ -23,6 +25,7 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.3.0",
+    "regenerator": "^0.14.1",
     "styled-components": "^2.2.1"
   },
   "devDependencies": {

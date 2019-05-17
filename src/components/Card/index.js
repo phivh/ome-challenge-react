@@ -4,6 +4,7 @@ import * as changeCase from 'change-case';
 import { Wrapper, CardCaption, CardCoverImageWrapper, CardWithImageWrapper, PaymentOption, PaymentWrapper, RadioLabel } from './styles';
 
 const donationAmountOption = [10, 20, 50, 100, 500];
+
 function CardWithImage({name, handleDonate}) {
     return <CardWithImageWrapper>
       <CardCoverImageWrapper>
