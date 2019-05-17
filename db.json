@@ -49,6 +49,24 @@
       "amount": 100,
       "currency": "THB",
       "id": 3
+    },
+    {
+      "charitiesId": 1,
+      "amount": 100,
+      "currency": "THB",
+      "id": 4
+    },
+    {
+      "charitiesId": 1,
+      "amount": 50,
+      "currency": "THB",
+      "id": 5
+    },
+    {
+      "charitiesId": 2,
+      "amount": 10,
+      "currency": "THB",
+      "id": 6
     }
   ]
 }
