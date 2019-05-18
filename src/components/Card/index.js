@@ -32,7 +32,7 @@ function CardWithImage({name, handleDonate}) {
     ));
   
     return <PaymentWrapper visible={visible}>
-      <i className="fas fa-times" onClick={handleCloseDialog}/>
+      <b className="payClose" onClick={handleCloseDialog}>X</b>
       <h3>Select the amount to donate ({currency})</h3>
       <PaymentOption>{payments}</PaymentOption>
       <div><button onClick={handlePay}>Pay</button></div>

@@ -47,9 +47,10 @@ export const PaymentWrapper = styled.div`
     align-items: center;
   }
   
-  > i {
+  > b.payClose {
     justify-content: flex-end;
     padding: 0px 20px;
+    cursor:pointer;
   }
   button {
     background:none;
@@ -61,6 +62,11 @@ export const PaymentWrapper = styled.div`
     &:hover {
       background:#0000ff30;
       cursor:pointer;
+    }
+  }
+  @media only screen and (max-width: 480px){
+    > h3 {
+      font-size:18px;
     }
   }
 `;
@@ -106,7 +112,9 @@ export const RadioLabel = styled.label`
   font-size: 22px;
   user-select: none;
   line-height: 1;
-    
+  @media only screen and (max-width: 480px){
+    font-size: 18px;
+  }
   &:hover input ~ .checkmark {
     background-color: #ccc;
   }

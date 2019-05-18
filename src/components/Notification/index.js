@@ -6,14 +6,14 @@ const NotificationDiv = styled.div`
   font-weight: normal;
   font-size: 16px;
   text-align: center;
-  transition: opacity 0.5s linear;
-  opacity: ${props => props.visible ? 1 : 0};
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(${props => props.visible ? '-2%' : '120%'});
   position: fixed;
-  min-width: 400px;
-  max-width: 600px;
+  min-width: 250px;
+  max-width: 400px;
   z-index: 99;
-  left: 10px;
-  top: 10px;
+  right: 10px;
+  top: 120px;
   > div {
     border-radius: 8px;
     color: white;
