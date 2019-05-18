@@ -65,3 +65,29 @@ Please remember that your patch must consist of multiple separate commits. Your 
 If you notice more bugs in the original implementation you can add fixes for those as well. You won't be penalized if you don't. However we ask you not to add more features than the one given in the mission list.
 
 Let's rock! :metal:
+
+## How to run the app:
+**Step 01:**
+```sh
+  npm install or yarn install
+  ```
+
+**Step 02:**
+Run api serve
+```sh
+  yarn server
+  ```
+
+**Step 03:**
+Generate UI
+```sh
+  yarn client
+  ```
+
+**Step 04:**
+Open direct link and enjoy new view
+```sh
+  localhost:3000 or can view direct on https://phivh.github.io/ome-challenge-react/
+  ```
+
+Thanks for awesome test!

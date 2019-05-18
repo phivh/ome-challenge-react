@@ -8,7 +8,7 @@ const donationAmountOption = [10, 20, 50, 100, 500];
 function CardWithImage({name, handleDonate}) {
     return <CardWithImageWrapper>
       <CardCoverImageWrapper>
-        <img src={`/images/${changeCase.paramCase(name)}.jpg`}/>
+        <img src={`./images/${changeCase.paramCase(name)}.jpg`}/>
       </CardCoverImageWrapper>
       <CardCaption>
         <div>{name}</div>
